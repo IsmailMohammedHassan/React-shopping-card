@@ -1,0 +1,37 @@
+[
+    {
+        "id":"id-1",
+        "title":"Laptops",
+        "imageUrl":"/images/prod1.jpg",
+        "disc": "Dell Inspiron 7306 2-in-1 x360 laptop - 11th Intel Core i5",
+        "price" : 4000,
+        "color": ["white", "black"]
+    },
+        {
+        "id":"id-2",
+        "title":"Back bag",
+        "imageUrl":"/images/prod2.jpg",
+        "disc": " Force Backpack for Unisex",
+        "price" : 200,
+        "color": ["Green", "black", "Blue Grey"]
+    },
+        {
+        "id":"id-3",
+        "title":"Sneakers",
+        "imageUrl":"/images/prod1.jpg",
+        "disc": "Testa Toro Mesh-Microfiber Embroidered-Logo Lace-up Sneakers for Men",
+        "price" : 1000,
+        "color": ["yellow", "black", "white"]
+    },
+        {
+        "id":"id-4",
+        "title":"tablets",
+        "imageUrl":"/images/prod4.jpg",
+        "disc": "New 2021 Apple iPad mini (8.3-inch, Wi-Fi, 64GB) - Space Grey (6th Generation)",
+        "price" : 8000,
+        "color": ["orange", "black"]
+    }
+         
+         
+
+]
