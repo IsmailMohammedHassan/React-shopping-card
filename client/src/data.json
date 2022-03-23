@@ -18,14 +18,14 @@
         {
         "id":"id-3",
         "title":"Sneakers",
-        "imageUrl":"/images/prod1.jpg",
+        "imageUrl":"/images/prod3.jpg",
         "disc": "Testa Toro Mesh-Microfiber Embroidered-Logo Lace-up Sneakers for Men",
         "price" : 1000,
         "color": ["yellow", "black", "white"]
     },
         {
         "id":"id-4",
-        "title":"tablets",
+        "title":"Tablets",
         "imageUrl":"/images/prod4.jpg",
         "disc": "New 2021 Apple iPad mini (8.3-inch, Wi-Fi, 64GB) - Space Grey (6th Generation)",
         "price" : 8000,
