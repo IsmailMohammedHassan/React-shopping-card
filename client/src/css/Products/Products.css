@@ -53,3 +53,25 @@ button:active:after {
   opacity: 1;
   transition: 0s;
 }
+
+.prod-info img {
+  display: block;
+  width: 40%;
+  margin: 20px auto;
+}
+.prod-info p {
+  color: #000000;
+  text-align: center;
+}
+.prod-info span {
+  color: #5a1bf5;
+}
+
+.close-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  font-size: 25px;
+  color: #5a1bf5;
+}
