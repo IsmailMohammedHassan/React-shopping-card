@@ -11,12 +11,14 @@ function App() {
   return (
     <div className="layout">
       <Header />
+
       <main>
         <div className="wrapper">
           <Products products={products} />
           <div className="filter-wrapper">Filter</div>
         </div>
       </main>
+
       <Footer />
     </div>
   );
