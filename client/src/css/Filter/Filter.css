@@ -1,0 +1,15 @@
+.filter-wrapper {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+.filter-wrapper .filter-title {
+  background-color: #15363d;
+  padding: 10px;
+  margin-bottom: 20px;
+  color: white;
+}
+.filter-wrapper > div {
+  padding: 5px 20px;
+  margin-bottom: 10px;
+}
