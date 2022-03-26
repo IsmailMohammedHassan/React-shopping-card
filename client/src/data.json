@@ -13,7 +13,7 @@
         "imageUrl":"/images/prod2.jpg",
         "disc": " Force Backpack for Unisex",
         "price" : 200,
-        "color": ["Green", "black", "Blue Grey"]
+        "color": ["Green","Blue Grey"]
     },
         {
         "id":"id-3",

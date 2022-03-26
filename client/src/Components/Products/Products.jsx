@@ -21,7 +21,7 @@ export default function Products({ products }) {
           </a>
           <div className="product-desc">
             <p>{prod.title}</p>
-            <span>{prod.price}</span>
+            <p>{prod.price}</p>
           </div>
           <button>Add to card</button>
         </div>
