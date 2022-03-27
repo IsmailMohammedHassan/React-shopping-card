@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Card from "./Components/Card/Card";
 import Filter from "./Components/Filter/Filter";
 
 import Footer from "./Components/Footer/Footer";
@@ -10,6 +11,9 @@ function App() {
   const [products, setProducts] = useState(data);
   const [sort, setSort] = useState("");
   const [colors, setColors] = useState("");
+  const [cardItems, setCardItems] = useState(
+    JSON.parse(localStorage.getItem("Card-Items")) || []
+  );
 
   const filterByColor = (e) => {
     setColors(e.target.value);
@@ -40,20 +44,47 @@ function App() {
     setProducts(newProducts);
   };
 
+  const addToCard = (product) => {
+    const cardItemsClone = [...cardItems];
+    let isProductExist = false;
+    cardItemsClone.forEach((prod) => {
+      if (prod.id == product.id) {
+        prod.qty++;
+        isProductExist = true;
+      }
+    });
+    if (!isProductExist) {
+      cardItemsClone.push({ ...product, qty: 1 });
+    }
+    setCardItems(cardItemsClone);
+  };
+
+  const removeFromCard = (product) => {
+    const cardItemsClone = [...cardItems];
+    setCardItems(cardItemsClone.filter((prod) => prod.id != product.id));
+  };
+
+  useEffect(() => {
+    localStorage.setItem("Card-Items", JSON.stringify(cardItems));
+  }, [cardItems]);
+
   return (
     <div className="layout">
       <Header />
 
       <main>
         <div className="wrapper">
-          <Products products={products} />
+          <Products products={products} addToCard={addToCard} />
           <Filter
             filterByColor={filterByColor}
             colors={colors}
             filterByOrder={filterByOrder}
             sort={sort}
+            productsNumber={products.length}
           />
         </div>
+
+        <Card cardItems={cardItems} removeFromCard={removeFromCard} />
       </main>
 
       <Footer />

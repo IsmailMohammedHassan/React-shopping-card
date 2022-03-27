@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../css/Products/Products.css";
 import ProductModal from "./ProductModal/ProductModal";
 
-export default function Products({ products }) {
+export default function Products({ products, addToCard }) {
   const [product, setProduct] = useState("");
 
   const openModal = (prod) => {
@@ -23,7 +23,9 @@ export default function Products({ products }) {
             <p>{prod.title}</p>
             <p>{prod.price}</p>
           </div>
-          <button>Add to card</button>
+          <button onClick={() => addToCard(prod)} className="Btn">
+            Add to card
+          </button>
         </div>
       ))}
       <ProductModal product={product} closeModal={closeModal} />

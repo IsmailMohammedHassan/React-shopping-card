@@ -2,11 +2,17 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import "../../css/Filter/Filter.css";
 
-export default function Filter({ filterByColor, colors, filterByOrder, sort }) {
+export default function Filter({
+  filterByColor,
+  colors,
+  filterByOrder,
+  sort,
+  productsNumber,
+}) {
   return (
     <div className="filter-wrapper">
       <h2 className="filter-title">Filter</h2>
-      <div className="num-of-products">4</div>
+      <div className="num-of-products">Available {productsNumber} items</div>
       <div className="filter-by-size">
         <span>Filter</span>
         <Form.Select
