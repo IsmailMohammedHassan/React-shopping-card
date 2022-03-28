@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../css/Card/Card.css";
+import Checkout from "../Checkout-Form/Checkout";
 
 export default function Card({ cardItems, removeFromCard }) {
+  const [showForm, setShowForm] = useState(false);
+  const [value, setValue] = useState("");
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    const order = {
+      name: value.name,
+      email: value.email,
+    };
+    console.log(order);
+  };
+
+  const handleChange = (e) => {
+    console.log(e.target.name);
+    setValue((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
   return (
     <div className="cart-wrapper">
       <div className="cart-title">
@@ -31,6 +51,27 @@ export default function Card({ cardItems, removeFromCard }) {
           </div>
         ))}
       </div>
+      {cardItems.length != 0 && (
+        <section className="cart-total-price">
+          <p className="text-info bg-dark">
+            Total: $
+            {cardItems.reduce((acc, p) => {
+              return acc + p.price;
+            }, 0)}
+          </p>
+          <button onClick={() => setShowForm(true)} className="btn btn-success">
+            {" "}
+            Select Product
+          </button>
+        </section>
+      )}
+
+      <Checkout
+        showForm={showForm}
+        setShowForm={setShowForm}
+        submitForm={submitForm}
+        handleChange={handleChange}
+      />
     </div>
   );
 }
