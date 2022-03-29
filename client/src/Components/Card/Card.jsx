@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../../css/Card/Card.css";
 import Checkout from "../Checkout-Form/Checkout";
 
+import Fade from "react-reveal/Fade";
+
 export default function Card({ cardItems, removeFromCard }) {
   const [showForm, setShowForm] = useState(false);
   const [value, setValue] = useState("");
@@ -31,26 +33,28 @@ export default function Card({ cardItems, removeFromCard }) {
           <p>There is {cardItems.length} product in card</p>
         )}
       </div>
-      <div className="cart-items">
-        {cardItems.map((item) => (
-          <div className="cart-item" key={item.id}>
-            <img src={item.imageUrl} alt="" />
-            <div className="cart-info">
-              <div>
-                <p>Product name: {item.title}</p>
-                <p>Quantity: {item.qty}</p>
-                <p>Product Price: ${item.price}</p>
+      <Fade right cascade>
+        <div className="cart-items">
+          {cardItems.map((item) => (
+            <div className="cart-item" key={item.id}>
+              <img src={item.imageUrl} alt="" />
+              <div className="cart-info">
+                <div>
+                  <p>Product name: {item.title}</p>
+                  <p>Quantity: {item.qty}</p>
+                  <p>Product Price: ${item.price}</p>
+                </div>
+                <button
+                  onClick={() => removeFromCard(item)}
+                  className="btn btn-danger"
+                >
+                  Remove
+                </button>
               </div>
-              <button
-                onClick={() => removeFromCard(item)}
-                className="btn btn-danger"
-              >
-                Remove
-              </button>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Fade>
       {cardItems.length != 0 && (
         <section className="cart-total-price">
           <p className="text-info bg-dark">
@@ -65,7 +69,6 @@ export default function Card({ cardItems, removeFromCard }) {
           </button>
         </section>
       )}
-
       <Checkout
         showForm={showForm}
         setShowForm={setShowForm}
