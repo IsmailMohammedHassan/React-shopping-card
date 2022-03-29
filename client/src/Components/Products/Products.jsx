@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../css/Products/Products.css";
 import ProductModal from "./ProductModal/ProductModal";
+import Zoom from "react-reveal/Zoom";
 
 export default function Products({ products, addToCard }) {
   const [product, setProduct] = useState("");
@@ -13,22 +14,24 @@ export default function Products({ products, addToCard }) {
   };
 
   return (
-    <div className="products-wrapper">
-      {products.map((prod) => (
-        <div key={prod.id} className="product-item">
-          <a href="#" onClick={() => openModal(prod)}>
-            <img src={prod.imageUrl} alt={prod.title} />
-          </a>
-          <div className="product-desc">
-            <p>{prod.title}</p>
-            <p>{prod.price}</p>
+    <Zoom cascade>
+      <div className="products-wrapper">
+        {products.map((prod) => (
+          <div key={prod.id} className="product-item">
+            <a href="#" onClick={() => openModal(prod)}>
+              <img src={prod.imageUrl} alt={prod.title} />
+            </a>
+            <div className="product-desc">
+              <p>{prod.title}</p>
+              <p>{prod.price}</p>
+            </div>
+            <button onClick={() => addToCard(prod)} className="Btn">
+              Add to card
+            </button>
           </div>
-          <button onClick={() => addToCard(prod)} className="Btn">
-            Add to card
-          </button>
-        </div>
-      ))}
-      <ProductModal product={product} closeModal={closeModal} />
-    </div>
+        ))}
+        <ProductModal product={product} closeModal={closeModal} />
+      </div>
+    </Zoom>
   );
 }
