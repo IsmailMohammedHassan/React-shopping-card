@@ -6,6 +6,8 @@ import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 import Products from "./Components/Products/Products";
 import data from "./data.json";
+import { Provider } from "react-redux";
+import store from "./Store/Store";
 
 function App() {
   const [products, setProducts] = useState(data);
@@ -69,26 +71,28 @@ function App() {
   }, [cardItems]);
 
   return (
-    <div className="layout">
-      <Header />
+    <Provider store={store}>
+      <div className="layout">
+        <Header />
 
-      <main>
-        <div className="wrapper">
-          <Products products={products} addToCard={addToCard} />
-          <Filter
-            filterByColor={filterByColor}
-            colors={colors}
-            filterByOrder={filterByOrder}
-            sort={sort}
-            productsNumber={products.length}
-          />
-        </div>
+        <main>
+          <div className="wrapper">
+            <Products products={products} addToCard={addToCard} />
+            <Filter
+              filterByColor={filterByColor}
+              colors={colors}
+              filterByOrder={filterByOrder}
+              sort={sort}
+              productsNumber={products.length}
+            />
+          </div>
 
-        <Card cardItems={cardItems} removeFromCard={removeFromCard} />
-      </main>
+          <Card cardItems={cardItems} removeFromCard={removeFromCard} />
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Provider>
   );
 }
 
