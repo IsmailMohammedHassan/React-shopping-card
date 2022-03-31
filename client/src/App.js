@@ -11,40 +11,10 @@ import store from "./Store/Store";
 
 function App() {
   const [products, setProducts] = useState(data);
-  const [sort, setSort] = useState("");
-  const [colors, setColors] = useState("");
+
   const [cardItems, setCardItems] = useState(
     JSON.parse(localStorage.getItem("Card-Items")) || []
   );
-
-  const filterByColor = (e) => {
-    setColors(e.target.value);
-    if (e.target.value == "ALL") {
-      setProducts(data);
-    } else {
-      let productsClone = [...data];
-      let newProducts = productsClone.filter(
-        (prod) => prod.color.indexOf(e.target.value) != -1
-      );
-      setProducts(newProducts);
-    }
-  };
-
-  const filterByOrder = (e) => {
-    let order = e.target.value;
-    setSort(order);
-    let productsClone = [...products];
-    let newProducts = productsClone.sort(function (first, second) {
-      if (order == "lowest") {
-        return first.price - second.price;
-      } else if (order == "highest") {
-        return second.price - first.price;
-      } else {
-        return first.id < second.id ? 1 : -1;
-      }
-    });
-    setProducts(newProducts);
-  };
 
   const addToCard = (product) => {
     const cardItemsClone = [...cardItems];
@@ -78,13 +48,7 @@ function App() {
         <main>
           <div className="wrapper">
             <Products products={products} addToCard={addToCard} />
-            <Filter
-              filterByColor={filterByColor}
-              colors={colors}
-              filterByOrder={filterByOrder}
-              sort={sort}
-              productsNumber={products.length}
-            />
+            <Filter />
           </div>
 
           <Card cardItems={cardItems} removeFromCard={removeFromCard} />

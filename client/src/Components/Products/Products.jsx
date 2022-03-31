@@ -47,7 +47,7 @@ function Products({ products, addToCard, fetchProducts }) {
 export default connect(
   (state) => {
     return {
-      products: state.Products.products,
+      products: state.Products.filterProducts,
     };
   },
   { fetchProducts }
