@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "../../css/Card/Card.css";
 import Checkout from "../Checkout-Form/Checkout";
-
+import { connect } from "react-redux";
 import Fade from "react-reveal/Fade";
+import { removeCard } from "../../Store/Actions/Cart";
 
-export default function Card({ cardItems, removeFromCard }) {
+function Card(props) {
   const [showForm, setShowForm] = useState(false);
   const [value, setValue] = useState("");
 
@@ -18,7 +19,6 @@ export default function Card({ cardItems, removeFromCard }) {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.name);
     setValue((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -27,39 +27,42 @@ export default function Card({ cardItems, removeFromCard }) {
   return (
     <div className="cart-wrapper">
       <div className="cart-title">
-        {cardItems.length === 0 ? (
+        {props.cartItems && props.cartItems.length === 0 ? (
           "Card is empty"
         ) : (
-          <p>There is {cardItems.length} product in card</p>
+          <p>
+            There is {props.cartItems && props.cartItems.length} product in card
+          </p>
         )}
       </div>
       <Fade right cascade>
         <div className="cart-items">
-          {cardItems.map((item) => (
-            <div className="cart-item" key={item.id}>
-              <img src={item.imageUrl} alt="" />
-              <div className="cart-info">
-                <div>
-                  <p>Product name: {item.title}</p>
-                  <p>Quantity: {item.qty}</p>
-                  <p>Product Price: ${item.price}</p>
+          {props.cartItems &&
+            props.cartItems.map((item) => (
+              <div className="cart-item" key={item._id}>
+                <img src={item.imageUrl} alt="" />
+                <div className="cart-info">
+                  <div>
+                    <p>Product name: {item.title}</p>
+                    <p>Quantity: {item.qty}</p>
+                    <p>Product Price: ${item.price}</p>
+                  </div>
+                  <button
+                    onClick={() => props.removeCard(item)}
+                    className="btn btn-danger"
+                  >
+                    Remove
+                  </button>
                 </div>
-                <button
-                  onClick={() => removeFromCard(item)}
-                  className="btn btn-danger"
-                >
-                  Remove
-                </button>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </Fade>
-      {cardItems.length != 0 && (
+      {props.cartItems && props.cartItems.length != 0 && (
         <section className="cart-total-price">
           <p className="text-info bg-dark">
             Total: $
-            {cardItems.reduce((acc, p) => {
+            {props.cartItems.reduce((acc, p) => {
               return acc + p.price;
             }, 0)}
           </p>
@@ -78,3 +81,12 @@ export default function Card({ cardItems, removeFromCard }) {
     </div>
   );
 }
+
+export default connect(
+  (state) => {
+    return {
+      cartItems: state.cart.cartItems,
+    };
+  },
+  { removeCard }
+)(Card);

@@ -12,33 +12,33 @@ import store from "./Store/Store";
 function App() {
   const [products, setProducts] = useState(data);
 
-  const [cardItems, setCardItems] = useState(
-    JSON.parse(localStorage.getItem("Card-Items")) || []
-  );
+  // const [cardItems, setCardItems] = useState(
+  //   JSON.parse(localStorage.getItem("Card-Items")) || []
+  // );
 
-  const addToCard = (product) => {
-    const cardItemsClone = [...cardItems];
-    let isProductExist = false;
-    cardItemsClone.forEach((prod) => {
-      if (prod.id == product.id) {
-        prod.qty++;
-        isProductExist = true;
-      }
-    });
-    if (!isProductExist) {
-      cardItemsClone.push({ ...product, qty: 1 });
-    }
-    setCardItems(cardItemsClone);
-  };
+  // const addToCard = (product) => {
+  //   const cardItemsClone = [...cardItems];
+  //   let isProductExist = false;
+  //   cardItemsClone.forEach((prod) => {
+  //     if (prod.id == product.id) {
+  //       prod.qty++;
+  //       isProductExist = true;
+  //     }
+  //   });
+  //   if (!isProductExist) {
+  //     cardItemsClone.push({ ...product, qty: 1 });
+  //   }
+  //   setCardItems(cardItemsClone);
+  // };
 
-  const removeFromCard = (product) => {
-    const cardItemsClone = [...cardItems];
-    setCardItems(cardItemsClone.filter((prod) => prod.id != product.id));
-  };
+  // const removeFromCard = (product) => {
+  //   const cardItemsClone = [...cardItems];
+  //   setCardItems(cardItemsClone.filter((prod) => prod.id != product.id));
+  // };
 
-  useEffect(() => {
-    localStorage.setItem("Card-Items", JSON.stringify(cardItems));
-  }, [cardItems]);
+  // useEffect(() => {
+  //   localStorage.setItem("Card-Items", JSON.stringify(cardItems));
+  // }, [cardItems]);
 
   return (
     <Provider store={store}>
@@ -47,11 +47,11 @@ function App() {
 
         <main>
           <div className="wrapper">
-            <Products products={products} addToCard={addToCard} />
+            <Products products={products} />
             <Filter />
           </div>
 
-          <Card cardItems={cardItems} removeFromCard={removeFromCard} />
+          <Card />
         </main>
 
         <Footer />
