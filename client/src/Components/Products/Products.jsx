@@ -4,8 +4,9 @@ import ProductModal from "./ProductModal/ProductModal";
 import Zoom from "react-reveal/Zoom";
 import { connect } from "react-redux";
 import { fetchProducts } from "../../Store/Actions/Product";
+import { addToCart } from "../../Store/Actions/Cart";
 
-function Products({ products, addToCard, fetchProducts }) {
+function Products(props) {
   const [product, setProduct] = useState("");
 
   const openModal = (prod) => {
@@ -16,15 +17,15 @@ function Products({ products, addToCard, fetchProducts }) {
   };
 
   useEffect(() => {
-    fetchProducts();
+    props.fetchProducts();
   }, []);
 
   return (
     <Zoom cascade>
       <div className="products-wrapper">
-        {products && products.length
-          ? products.map((prod) => (
-              <div key={prod.id} className="product-item">
+        {props.products && props.products.length
+          ? props.products.map((prod) => (
+              <div key={prod._id} className="product-item">
                 <a href="#" onClick={() => openModal(prod)}>
                   <img src={prod.imageUrl} alt={prod.title} />
                 </a>
@@ -32,7 +33,7 @@ function Products({ products, addToCard, fetchProducts }) {
                   <p>{prod.title}</p>
                   <p>{prod.price}</p>
                 </div>
-                <button onClick={() => addToCard(prod)} className="Btn">
+                <button onClick={() => props.addToCart(prod)} className="Btn">
                   Add to card
                 </button>
               </div>
@@ -50,5 +51,5 @@ export default connect(
       products: state.Products.filterProducts,
     };
   },
-  { fetchProducts }
+  { fetchProducts, addToCart }
 )(Products);
