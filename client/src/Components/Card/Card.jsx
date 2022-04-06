@@ -4,18 +4,23 @@ import Checkout from "../Checkout-Form/Checkout";
 import { connect } from "react-redux";
 import Fade from "react-reveal/Fade";
 import { removeCard } from "../../Store/Actions/Cart";
+import CardModal from "./CardModal/CardModal";
 
 function Card(props) {
   const [showForm, setShowForm] = useState(false);
   const [value, setValue] = useState("");
-
+  const [order, setOrder] = useState(false);
   const submitForm = (e) => {
     e.preventDefault();
     const order = {
       name: value.name,
       email: value.email,
     };
-    console.log(order);
+    setOrder(order);
+  };
+
+  const closeModal = () => {
+    setOrder(false);
   };
 
   const handleChange = (e) => {
@@ -35,6 +40,7 @@ function Card(props) {
           </p>
         )}
       </div>
+
       <Fade right cascade>
         <div className="cart-items">
           {props.cartItems &&
@@ -77,6 +83,12 @@ function Card(props) {
         setShowForm={setShowForm}
         submitForm={submitForm}
         handleChange={handleChange}
+      />
+
+      <CardModal
+        order={order}
+        cartItems={props.cartItems}
+        closeModal={closeModal}
       />
     </div>
   );
