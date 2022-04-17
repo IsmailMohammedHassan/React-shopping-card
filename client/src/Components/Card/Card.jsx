@@ -5,22 +5,25 @@ import { connect } from "react-redux";
 import Fade from "react-reveal/Fade";
 import { removeCard } from "../../Store/Actions/Cart";
 import CardModal from "./CardModal/CardModal";
+import { clearOrder, createOrder } from "../../Store/Actions/Orders";
 
 function Card(props) {
   const [showForm, setShowForm] = useState(false);
   const [value, setValue] = useState("");
-  const [order, setOrder] = useState(false);
+
   const submitForm = (e) => {
     e.preventDefault();
     const order = {
       name: value.name,
       email: value.email,
     };
-    setOrder(order);
+    props.createOrder(order);
   };
 
   const closeModal = () => {
-    setOrder(false);
+    props.clearOrder();
+    setShowForm(false);
+    props.cartItems.length = 0;
   };
 
   const handleChange = (e) => {
@@ -86,7 +89,7 @@ function Card(props) {
       />
 
       <CardModal
-        order={order}
+        order={props.order}
         cartItems={props.cartItems}
         closeModal={closeModal}
       />
@@ -97,8 +100,9 @@ function Card(props) {
 export default connect(
   (state) => {
     return {
+      order: state.order.order,
       cartItems: state.cart.cartItems,
     };
   },
-  { removeCard }
+  { removeCard, createOrder, clearOrder }
 )(Card);

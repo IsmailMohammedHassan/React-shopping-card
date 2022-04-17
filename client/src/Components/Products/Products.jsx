@@ -22,7 +22,7 @@ function Products(props) {
 
   return (
     <Zoom cascade>
-      <div className="products-wrapper">
+      <div className="products-wrapper flex-wrap">
         {props.products && props.products.length
           ? props.products.map((prod) => (
               <div key={prod._id} className="product-item">
