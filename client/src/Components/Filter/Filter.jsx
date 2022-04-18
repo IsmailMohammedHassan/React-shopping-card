@@ -23,7 +23,7 @@ function Filter(props) {
                 props.filterByColor(props.products, e.target.value)
               }
             >
-              <option value="ALL">ALL</option>
+              <option value="ALL">All</option>
               <option value="white">white</option>
               <option value="black">black</option>
               <option value="Blue Grey">Blue Grey</option>

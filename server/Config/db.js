@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 
 const url = "mongodb://localhost/ShoppingDB";
-
+const uriFromEnv = process.env.MONGO_URI;
 function runDatabase() {
   mongoose
-    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(uriFromEnv || url, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
     .then(() => {
       console.log("Connected to database ");
     })
