@@ -32,6 +32,7 @@ function Card(props) {
       [e.target.name]: e.target.value,
     }));
   };
+
   return (
     <div className="cart-wrapper">
       <div className="cart-title">

@@ -33,3 +33,10 @@ main {
 .wrapper .filter-wrapper {
   width: 30%;
 }
+.active {
+  border-top: 0.4px solid rgb(0, 0, 0);
+  border-bottom: 0.1px solid rgb(0, 0, 0);
+
+  color: black !important;
+  font-weight: bold;
+}
